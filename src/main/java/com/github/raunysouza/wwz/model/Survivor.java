@@ -21,6 +21,9 @@ public class Survivor extends PersistableEntity {
     @OneToOne(orphanRemoval = true, cascade = CascadeType.ALL)
     private Location lastLocation;
 
+    @Column(name = "infected_flags")
+    private int infectedFlags;
+
     public enum Gender {
         MALE, FEMALE
     }
@@ -55,5 +58,21 @@ public class Survivor extends PersistableEntity {
 
     public void setLastLocation(Location lastLocation) {
         this.lastLocation = lastLocation;
+    }
+
+    public int getInfectedFlags() {
+        return infectedFlags;
+    }
+
+    public void setInfectedFlags(int infectedFlags) {
+        this.infectedFlags = infectedFlags;
+    }
+
+    public void flag() {
+        infectedFlags++;
+    }
+
+    public boolean isInfected() {
+        return infectedFlags >= 3;
     }
 }
